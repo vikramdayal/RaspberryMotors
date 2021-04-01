@@ -50,4 +50,13 @@ power suppoy for the servos, feel free to use a breadboard instead:
 Advanced Users
 ==============
 The rpi.GPIO library from Rasberry Pi has been encapsulated within the servo package. For now, the GPIO interface 
-has not been exposed to the user and the GPIO.cleanup() is performed 
+has not been exposed to the user and the GPIO.cleanup() is performed automatically when the last servo is shutdown().
+At a leter state, I might move the GPIO functions into another package when I do stepper motors and other motor
+controls.
+
+Disclaimers
+===========
+1. As is software. Please let me know any feature requests.
+2. It's not the nest software in the world, take it with a pinch of salt.
+
+
