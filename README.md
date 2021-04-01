@@ -3,36 +3,35 @@
 Welcome to a Rasberry Pi service library dedicated to motor control. This library has been started as an interface to control
 sevro motors using the GPIO pins on the Rasberry pi. 
 
-The motivation to write the this library was that using servos on Rasberry is too painful. One has to to set up the pluse width modulation (PWM) and claculate duty cycles in order to operate the servos! I also wanted to control several servo motors simulatenously and 
-most example were showing how to control one servo at a time. Mostly i missed, the quiet elegance on the Arduino Servo library.
+The motivation to write the this library was that using servos on Rasberry is too painful. One has to to set up the pluse width modulation (PWM) and calculate duty cycles in order to operate the servos! I also wanted to control several servo motors simulatenously and 
+most example were showing only how to control one servo at a time. Mostly, I was missing the quiet elegance on the Arduino Servo library.
 
 Getting started
 ===============
-Download or clone this site:
 
 1. Make your working directory and change directory (cd) to it
 2. Issue the following command:
 **git clone https://github.com/vikramdayal/RasberryServo**
 3. cd RasberryServo
-4. Explore and test
+4. Tou are done! Explore and test
 
-If you want to figure out how to use the library, you might start by using the examples in the sequence provided below:
+If you want to figure out how to use the library, you might start by using the examples in the order provided below:
 
 1. example_simple_servo.py: simple setup and control a single servo
 2. example_simple_2servos.py: simple setup and control two servos sequentailly
 3. example_timer_servo.py: advanced setup and control two servos simultaneously
 
-By the time you are done with the third example, you should find that you can do pretty much anything with
+By the time you are done with the third example, you will find that you can do pretty much anything with
 Rasberry Pi and the Servo library.
 
-Please note that the servos will operate only if they are wired correctly. Simplified instrucions on wiring the servos are provided here.
+Please note that the servos will operate only if they are wired correctly. Simplified instrucions on wiring the servos are provided below.
 
 Wiring required to run the example
 ==================================
 
 The examples provided here require two servo motors, I used Vilros SG90 (9g) and MicroServo DXW90 (9g) servos. Please feel free 
-to use any of your own brands and ratings. Keep in mind if you are using the bigger servos you would have to power them seperately. The internet
-is full of examples of how to wire up servos and using breadboards, feel free to follow any of those instructions. Essentially, the main requirement is to connect the control(usually the yellow) wire of the servo to the GPIO pin on the Rasberry.
+to use any of your own servo brands with their ratings. Keep in mind if you are using the bigger servos you would have to power them seperately. The internet
+is full of examples of how to wire up servos and using breadboards and external power supplies, feel free to follow any of those instructions. Essentially, the main requirement for this library is to connect the control(usually the yellow) wire of the servo to the GPIO pin on the Rasberry Pi.
 
 Please note that by defualt, the library uses the GPIO.BOARD settings, which means that all pin numbers are defined as physical pin numbers. All examples assume physical pin numbers.
 
