@@ -17,7 +17,7 @@ class servo:
         servo.mode=newMode
 
 
-    def __init__(self,port,min=2.0,max=10.5,waitTime=0.5):
+    def __init__(self,port,min=2.0,max=10.5,waitTime=1.0):
       self.port = port
       self.min = min
       self.max = max
@@ -61,11 +61,14 @@ class servo:
     #SetAngleAndWait
     # this function is the simple implementation when there a few servos in play and
     # one can wait for the servo to respond
-    def setAngleAndWait(self,degs):
+    def setAngleAndWait(self,degs,t=None):
         duty=self.getDuty(degs)
         self.pwm.ChangeDutyCycle(duty)
+
+        if t is None:
+            t = self.waitTime
         # wait for servo to respond and then set duty cycle to zero
-        sleep(self.waitTime)
+        sleep(t)
         self.pwm.ChangeDutyCycle(0)
 
 
