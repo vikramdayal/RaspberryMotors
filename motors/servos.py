@@ -1,6 +1,29 @@
 import RPi.GPIO as GPIO
 from time import sleep
 
+######################################################################
+# service functions provided by servos package. They are a short
+# cut to servos.servo.xxx static functions
+######################################################################
+
+def setMode(mode):
+    servo.setMode(mode)
+
+
+def wait():
+    servo.wait()
+
+
+def calibrate(port,duty):
+    s1 = servo(port)
+    s1.testDuty(duty)
+    s1.shutdown()
+
+
+########################################################################
+# class servo, which encapuslates all operations that are required for
+# servo opartations
+########################################################################
 class servo:
     """ servo class first create the servo class with port
         number. Then test it to figure out the 180 degree rotation """
@@ -23,13 +46,13 @@ class servo:
       self.max = max
       self.last = 0
       self.waitTime=waitTime
+      print("waitTime=", waitTime)
       if servo.servoCount == 0:
           self.setMode(servo.mode)
       GPIO.setup(port, GPIO.OUT)
       self.pwm=GPIO.PWM(port, 50)
       self.pwm.start(0)
       servo.servoCount = servo.servoCount + 1
-      servo.active[port]=self  #register the io port for other activities
 
 
     #duty is tested: start with 2 for zero degrees and 10.5 for 180
@@ -95,7 +118,7 @@ class servo:
     # changes duty cycle to zero
     def wait():
         t=max(servo.active, key=servo.waittime)
-        print("Waiting for ", t)
+        print("Waiting for ", t, " time=",t.waitTime )
         sleep(t.waitTime)
         #cycle through active and change duty to zero
         cnt=0
@@ -103,4 +126,6 @@ class servo:
             if s is not None:
                 s.pwm.ChangeDutyCycle(0)
             servo.active[cnt]=None
+            cnt = cnt + 1
         print("done reset duty")
+

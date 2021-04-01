@@ -28,7 +28,7 @@ def main():
     s2.setAngle(0)   # move S2 to default position of zero degrees
     #now wait for the  both servos to respond. In this example it will wait
     # for max(0.5, 1.0)= 1.0 seconds
-    servos.servo.wait()
+    servos.wait()
 
     s1.setAngle(180) # move S1 position of 180 degrees
     s2.setAngle(180) # move S2 position of 180 degrees
@@ -37,10 +37,10 @@ def main():
     servos.servo.wait()
 
     s1.setAngle(0)   # move S1 back to position of zero degrees
-    servos.servo.wait() # it will wait for 0.5 seconds because there waitime for s1 is 0.5
+    servos.wait() # it will wait for 0.5 seconds because there waitime for s1 is 0.5
 
     s2.setAngle(0)   # move S2 back to position of zero degrees
-    servos.servo.wait() # it will wait for 1 second because there waitime for s2 is 1.0
+    servos.wait() # it will wait for 1 second because there waitime for s2 is 1.0
 
     # we are done with the servo ports shut them down
     s1.shutdown();
