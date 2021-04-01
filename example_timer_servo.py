@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # Name: example_timer_servo.py
 # Author: Vikram Dayal
 
@@ -10,7 +12,7 @@
 # multiple timing issues and comes out after the slowest of the servos times out.
 
 # In this example, we are connecting two servo control
-# to GPIO port 11,13 (RasberryPi 4 and 3 are good with it)
+# to GPIO pin 11,13 (RasberryPi 4 and 3 are good with it)
 
 #import the servos package from motors module
 from motors import servos
@@ -18,9 +20,9 @@ from motors import servos
 def main():
     print("starting example")
 
-    #create the servo objects , connected to GPIO board port #11 and 13
-    s1 = servos.servo(port=11, waitTime=0.5)
-    s2 = servos.servo(port=13, waitTime=1.0)
+    #create the servo objects , connected to GPIO board pin #11 and 13
+    s1 = servos.servo(pin=11, waitTime=0.5)
+    s2 = servos.servo(pin=13, waitTime=1.0)
 
     #operate the servos. Note, we are using setAngle function
     #which signals the servo but does not wait, so we will explicitly wait
@@ -42,7 +44,7 @@ def main():
     s2.setAngle(0)   # move S2 back to position of zero degrees
     servos.wait() # it will wait for 1 second because there waitime for s2 is 1.0
 
-    # we are done with the servo ports shut them down
+    # we are done with the servo pin shut them down
     s1.shutdown();
     s2.shutdown();
 

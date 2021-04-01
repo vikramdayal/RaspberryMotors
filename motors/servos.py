@@ -1,3 +1,26 @@
+#!/usr/bin/env python3
+
+
+# Name: __main__.py
+# Author: Vikram Dayal
+# The servos package. It supports the supports the servo class and the following functions:
+#
+# setMode(mode) : set the GPIO mode to define the pins. To be called before doing anything
+#                 with GPIO
+# usage examples:
+#    servos.setMode(RPi.GPIO.BOARD)
+
+# wait(): Wait for the max waitime of all devices that are currently performing setAngle
+#         operations
+# usage examples:
+#    servos.wait()
+
+
+# calibrate(pin,duty): calibrate function that takes a pin number and duty. It sets the duty cycle
+#                      of the device to allow for measure of the angle that corresponds to the
+#                      duty cycle
+
+
 import RPi.GPIO as GPIO
 from time import sleep
 
@@ -14,8 +37,8 @@ def wait():
     servo.wait()
 
 
-def calibrate(port,duty):
-    s1 = servo(port)
+def calibrate(pin,duty):
+    s1 = servo(pin)
     s1.testDuty(duty)
     s1.shutdown()
 
@@ -25,7 +48,7 @@ def calibrate(port,duty):
 # servo opartations
 ########################################################################
 class servo:
-    """ servo class first create the servo class with port
+    """ servo class first create the servo class with pin
         number. Then test it to figure out the 180 degree rotation """
 
     mode=GPIO.BOARD
@@ -40,8 +63,8 @@ class servo:
         servo.mode=newMode
 
 
-    def __init__(self,port,min=2.0,max=10.5,waitTime=1.0):
-      self.port = port
+    def __init__(self,pin,min=2.0,max=10.5,waitTime=1.0):
+      self.pin = pin
       self.min = min
       self.max = max
       self.last = 0
@@ -49,8 +72,8 @@ class servo:
       print("waitTime=", waitTime)
       if servo.servoCount == 0:
           self.setMode(servo.mode)
-      GPIO.setup(port, GPIO.OUT)
-      self.pwm=GPIO.PWM(port, 50)
+      GPIO.setup(pin, GPIO.OUT)
+      self.pwm=GPIO.PWM(pin, 50)
       self.pwm.start(0)
       servo.servoCount = servo.servoCount + 1
 
@@ -67,12 +90,12 @@ class servo:
 
         # note about following code:
         # looks like the internal pointers to the pwm structures are not getting
-        # cleaned. For reuse of the same port, it is important to actually del
+        # cleaned. For reuse of the same pin, it is important to actually del
         # pwm and let GC do it's business
         del self.pwm
         if servo.servoCount == 0:
             GPIO.cleanup()
-            print("closed last port shutdown happened")
+            print("closed last pin shutdown happened")
 
 
     def getDuty(self,degs):
@@ -105,7 +128,7 @@ class servo:
     def setAngle(self,degs):
         duty=self.getDuty(degs)
         self.pwm.ChangeDutyCycle(duty)
-        servo.active[self.port]=self
+        servo.active[self.pin]=self
 
 
     def waittime(p):
@@ -128,4 +151,3 @@ class servo:
             servo.active[cnt]=None
             cnt = cnt + 1
         print("done reset duty")
-

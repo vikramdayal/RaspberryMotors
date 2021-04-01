@@ -1,8 +1,10 @@
+#!/usr/bin/env python3
+
 # Name: example_simple_2servos.py
 # Author: Vikram Dayal
 # simple example of how to use the servos interface.
 # In this example, we are connecting two servo control
-# to GPIO port 11,13 (RasberryPi 4 and 3 are good with it)
+# to GPIO pin 11,13 (RasberryPi 4 and 3 are good with it)
 
 #import the servos package from motors module
 from motors import servos
@@ -10,7 +12,7 @@ from motors import servos
 def main():
     print("starting example")
 
-    #create the servo objects , connected to GPIO board port #11 and 13
+    #create the servo objects , connected to GPIO board pin #11 and 13
     s1 = servos.servo(11)
     s2 = servos.servo(13)
 
@@ -26,7 +28,7 @@ def main():
     s1.setAngleAndWait(0, 0.5)   # move S1 back to position of zero degrees
     s2.setAngleAndWait(0, 0.5)   # move S2 back to position of zero degrees
 
-    # we are done with the servo ports shut them down
+    # we are done with the servo pin shut them down
     s1.shutdown();
     s2.shutdown();
 
