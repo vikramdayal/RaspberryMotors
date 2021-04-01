@@ -8,9 +8,9 @@ control several servo motors simulatenously and was missing the quiet elegance o
 If you want to figure out how to use my library, I would suggest
 that you start by using the examples in the sequence provided below:
 
-1. example_simple_servo.py
-2. example_simple_2servos.py
-3. example_timer_servo.py
+1. example_simple_servo.py: simple setup and control a single servo
+2. example_simple_2servos.py: simple setup and control two servos sequentailly
+3. example_timer_servo.py: advanced setup and control two servos simultaneously
 
 By the time you are done with the third example, you should find that you can do pretty much anything with
 Rasberry Pi and the Servo library.
@@ -20,14 +20,16 @@ Wiring required to run the example
 
 The examples require two servo motors, I used Vilros SG90 (9g) and MicroServo DXW90 (9g) servos. Please feel free 
 to use your own. Keep in mind if you are using the bigger servos you would have to power them sepearetly. The internet
-is full of examples of how to wire up servos. In my example the wiring is very simple, to minimise power ports and segregate
-power suppoy for the servos, feel free to use a breadboard instead:
+is full of examples of how to wire up servos. In my example the wiring is very simple, to minimise power pins and segregate
+power suppoy for the servos, feel free to use a breadboard instead.
+
+Please note that by defualt, the library uses the GPIO.BOARD settings, which means that all pin numbers are defined as physical pin numbers. All examples assume physical pin numbers.
 
  servo-1 (refered to S1 in the example code)
  -------------------------------------------
  
     ---------------------------------------------
-    | servo wire | connected to GPIO port on Pi |
+    | servo wire | connected to GPIO pin on Pi  |
     |------------|------------------------------|
     | Brown      | 6 (GND)                      |
     | Red        | 2 (5v power)                 |
@@ -39,7 +41,7 @@ power suppoy for the servos, feel free to use a breadboard instead:
  -------------------------------------------
  
     ---------------------------------------------
-    | servo wire | connected to GPIO port on Pi |
+    | servo wire | connected to GPIO pin on Pi  |
     |------------|------------------------------|
     | Brown      | 14(GND)                      |
     | Red        | 4 (5v power)                 |
@@ -63,13 +65,13 @@ from 2.0 to 10.5.
 
 If the above paragraph does not make any sense, don't worry. The process of setting up the servos has been simplified for command line use. 
 The instructions for use of a different servo motor and determining duty are as follows: 
-1. Wire up the servo motor as per instructions shown above (let's say we wired up on GPIO port 11, rest of insructions are for port 11)
+1. Wire up the servo motor as per instructions shown above (let's say we wired up on GPIO pin 11, rest of insructions are for pin 11)
 2. From the home directory of this project, run the following command:
-**python3 -m motor --port=11 --duty=2.0***
+**python3 -m motor --pin=11 --duty=2.0***
 3. Observe the motor position. Change the value of duty till you observe the stepper motor is at position zero. Note that the motor will not rotate any further if you keep decreasing the value of duty.Take the highest value of duty when the angle is still zero.
 4. Repeat the same steps to get the corresponding value of duty till you get closest to 180 degress
 5. While developing the python code, instatiate the servo object as per the following code:
-**s1 = servos.servo(port=11, min=2.0,max=10.5,waitTime=0.5)**
+**s1 = servos.servo(pin=11, min=2.0,max=10.5,waitTime=0.5)**
 
 Rest of the code remains unchanged
 
