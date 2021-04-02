@@ -16,10 +16,26 @@
 #    servos.wait()
 
 
+# wait(wt): Wait for the min wt and max waitTime of all devices that are currently performing setAngle
+#         operations.
+# usage examples:
+#    servos.wait(wt)
+# For example:
+#     if servo waitTimes are [0.5, 0.8] and wt=0.25, it will wait for 0.25 seconds
+#     if servo waitTimes are [0.5, 0.8] and wt=0.75, it will wait for 0.75 seconds
+#     if servo waitTimes are [0.5, 0.8] and wt=0.9,  it will wait for 0.8 seconds
+
+
 # calibrate(pin,duty): calibrate function that takes a pin number and duty. It sets the duty cycle
 #                      of the device to allow for measure of the angle that corresponds to the
 #                      duty cycle
 
+
+# ResetGpioAtShutdown(flag): By default when the last servo is shutdown, the GPIO is cleaned up for safety
+#                            However, this might not be the desireable effect if GPIO is being used for
+#                            other purposes. In such cases, at the outset of the script, issue the following:
+#                                ResetGpioAtShutdown(False)
+#
 
 import RPi.GPIO as GPIO
 from time import sleep
@@ -33,8 +49,8 @@ def setMode(mode):
     servo.setMode(mode)
 
 
-def wait():
-    servo.wait()
+def wait(tw=None):
+    servo.wait(tw)
 
 
 def calibrate(pin,duty):
@@ -42,6 +58,9 @@ def calibrate(pin,duty):
     s1.testDuty(duty)
     s1.shutdown()
 
+
+def ResetGpioAtShutdown(flag):
+    servo.ResetGpioAtShutdown(flag)
 
 ########################################################################
 # class servo, which encapuslates all operations that are required for
@@ -54,13 +73,19 @@ class servo:
     mode=GPIO.BOARD
     servoCount=0
     active=[None]*40 #there are 40 GPIO pins in a Rasberry Pi
+    resetGpioAtShutdownFlag=True
 
 
     #static method
-    def setMode(self,newMode):
+    def setMode(newMode):
         print("Setting mode ", newMode, " Old mode", servo.mode)
         GPIO.setmode(newMode)
         servo.mode=newMode
+
+
+    def ResetGpioAtShutdown(flag):
+        servo.resetGpioAtShutdownFlag=flag
+        print("resetGpioAtShutdownFlag set to ", servo.resetGpioAtShutdownFlag)
 
 
     def __init__(self,pin,min=2.0,max=10.5,waitTime=1.0):
@@ -71,7 +96,7 @@ class servo:
       self.waitTime=waitTime
       print("waitTime=", waitTime)
       if servo.servoCount == 0:
-          self.setMode(servo.mode)
+          servo.setMode(servo.mode)
       GPIO.setup(pin, GPIO.OUT)
       self.pwm=GPIO.PWM(pin, 50)
       self.pwm.start(0)
@@ -93,7 +118,7 @@ class servo:
         # cleaned. For reuse of the same pin, it is important to actually del
         # pwm and let GC do it's business
         del self.pwm
-        if servo.servoCount == 0:
+        if servo.servoCount == 0 and servo.resetGpioAtShutdownFlag:
             GPIO.cleanup()
             print("closed last pin shutdown happened")
 
@@ -139,10 +164,13 @@ class servo:
     #wait
     #sleeps for max wait time of the servos called by setAngle and then and then
     # changes duty cycle to zero
-    def wait():
+    def wait(wt=None):
         t=max(servo.active, key=servo.waittime)
-        print("Waiting for ", t, " time=",t.waitTime )
-        sleep(t.waitTime)
+        w=t.waitTime
+        if wt is not None:
+            w=min(w, wt)
+        print("Waiting for ", w)
+        sleep(w)
         #cycle through active and change duty to zero
         cnt=0
         for s in servo.active:

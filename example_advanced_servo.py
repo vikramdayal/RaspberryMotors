@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
 
-# Name: example_simple_servo.py
+# Name: example_advanced_servo.py
 # Author: Vikram Dayal
-# simple example of how to use the servos interface.
+# Advanced example of how to use the servos interface.
 # In this example, we are connecting a sinle servo control
 # to GPIO pin 11 (RaspberryPi 4 and 3 are good with it)
+# 1. We will connect using the BCM interface
+#     refer: https://www.raspberrypi-spy.co.uk/2012/09/checking-your-raspberry-pi-board-version/
+# 2. We will set ResetGpioAtShutdown(False), so GPIO auto cleanup will not be done on servo shutdown,
+#    hence we will have do that inside our code.
 
 # Wiring diagram
 #   servo-1 (referred to S1 in the example code)
@@ -19,12 +23,18 @@
 ##############################################################
 #import the servos package from motors module
 from motors import servos
+import RPi.GPIO as GPIO
 
 def main():
     print("starting example")
 
-    #create a servo object, connected to GPIO board pin #11
-    s1 = servos.servo(11)
+    servos.ResetGpioAtShutdown(False) # do not reset GPIO at last servo shutdown
+
+    servos.setMode(GPIO.BCM) # refer to the pins by the "Broadcom SOC channel" number
+
+    #create a servo object, connected to GPIO board pin #11 which stands for BCM GPIO pin 17
+    # refer to https://www.raspberrypi-spy.co.uk/2012/09/checking-your-raspberry-pi-board-version/
+    s1 = servos.servo(17)
 
     #operate the servos. Note, we are using setAngleAndWait function
     #which waits for a specific time (default 1 sec) for the servo to react
@@ -37,6 +47,9 @@ def main():
 
     # we are done with the servo pin shut it down
     s1.shutdown();
+
+    #since GPIO cleanup is not done automatically, we have to do it within our code here
+    GPIO.cleanup()
 
 
 if __name__ == "__main__":

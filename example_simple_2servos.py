@@ -4,8 +4,27 @@
 # Author: Vikram Dayal
 # simple example of how to use the servos interface.
 # In this example, we are connecting two servo control
-# to GPIO pin 11,13 (RasberryPi 4 and 3 are good with it)
+# to GPIO pin 11,13 (RaspberryPi 4 and 3 are good with it)
 
+# Wiring diagram
+#   servo-1 (referred to S1 in the example code)
+#   ---------------------------------------------
+#   | servo wire | connected to GPIO pin on Pi  |
+#   |------------|------------------------------|
+#   | Brown      | 6 (GND)                      |
+#   | Red        | 2 (5v power)                 |
+#   | Yellow     | 11(GPIO 17 on Pi-4)          |
+#   ---------------------------------------------
+#   servo-2 (referred to S2 in the example code)
+#   ---------------------------------------------
+#   | servo wire | connected to GPIO pin on Pi  |
+#   |------------|------------------------------|
+#   | Brown      | 14(GND)                      |
+#   | Red        | 4 (5v power)                 |
+#   | Yellow     | 13(GPIO 27 on Pi-4)          |
+#   ---------------------------------------------
+
+##############################################################
 #import the servos package from motors module
 from motors import servos
 

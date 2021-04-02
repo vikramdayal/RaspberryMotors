@@ -12,8 +12,27 @@
 # multiple timing issues and comes out after the slowest of the servos times out.
 
 # In this example, we are connecting two servo control
-# to GPIO pin 11,13 (RasberryPi 4 and 3 are good with it)
+# to GPIO pin 11,13 (RaspberryPi 4 and 3 are good with it)
 
+# Wiring diagram
+#   servo-1 (referred to S1 in the example code)
+#   ---------------------------------------------
+#   | servo wire | connected to GPIO pin on Pi  |
+#   |------------|------------------------------|
+#   | Brown      | 6 (GND)                      |
+#   | Red        | 2 (5v power)                 |
+#   | Yellow     | 11(GPIO 17 on Pi-4)          |
+#   ---------------------------------------------
+#   servo-2 (referred to S2 in the example code)
+#   ---------------------------------------------
+#   | servo wire | connected to GPIO pin on Pi  |
+#   |------------|------------------------------|
+#   | Brown      | 14(GND)                      |
+#   | Red        | 4 (5v power)                 |
+#   | Yellow     | 13(GPIO 27 on Pi-4)          |
+#   ---------------------------------------------
+
+##############################################################
 #import the servos package from motors module
 from motors import servos
 
@@ -29,8 +48,8 @@ def main():
     s1.setAngle(0)   # move S1 to default position of zero degrees
     s2.setAngle(0)   # move S2 to default position of zero degrees
     #now wait for the  both servos to respond. In this example it will wait
-    # for max(0.5, 1.0)= 1.0 seconds
-    servos.wait()
+    # for 0.25 seconds
+    servos.wait(0.25)
 
     s1.setAngle(180) # move S1 position of 180 degrees
     s2.setAngle(180) # move S2 position of 180 degrees
