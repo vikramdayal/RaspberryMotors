@@ -18,7 +18,7 @@
 
 ##############################################################
 #import the servos package from motors module
-from motors import servos
+from RaspberryMotors.motors import servos
 
 def main():
     print("starting example")

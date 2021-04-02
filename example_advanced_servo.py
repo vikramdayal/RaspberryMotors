@@ -22,7 +22,7 @@
 
 ##############################################################
 #import the servos package from motors module
-from motors import servos
+from RaspberryMotors.motors import servos
 import RPi.GPIO as GPIO
 
 def main():
