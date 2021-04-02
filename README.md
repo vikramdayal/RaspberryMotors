@@ -1,4 +1,4 @@
-#RaspberryMotors
+# RaspberryMotors
 
 Welcome to a Raspberry Pi service library dedicated to motor control. This library has been started as an interface to control servo motors using the GPIO pins on the Raspberry pi. Other types of motors like Stepper motors and DC motors will be added as we go along.
 
@@ -19,6 +19,7 @@ If you want to figure out how to use the library, you might start by using the e
 1. example_simple_servo.py: simple setup and control a single servo
 2. example_simple_2servos.py: simple setup and control two servos sequentially
 3. example_timer_servo.py: advanced setup and control two servos simultaneously
+4. example_advanced_servo.py: adanced setup using using the BCM interface and using ResetGpioAtShutdown(False)
 
 By the time you are done with the third example, you will find that you can do pretty much anything with
 Raspberry Pi and the Servo library.
