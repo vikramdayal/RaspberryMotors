@@ -11,8 +11,7 @@ Getting started
 1. Make your working directory and change directory (cd) to it
 2. Issue the following command:
 **git clone https://github.com/vikramdayal/RaspberryMotors**
-3. cd RaspberryMotors
-4. You are done! Explore and test
+3. You are done! Explore and test
 
 If you want to figure out how to use the library, you might start by using the examples in the order provided below:
 
@@ -20,6 +19,12 @@ If you want to figure out how to use the library, you might start by using the e
 2. example_simple_2servos.py: simple setup and control two servos sequentially
 3. example_timer_servo.py: advanced setup and control two servos simultaneously
 4. example_advanced_servo.py: adanced setup using using the BCM interface and using ResetGpioAtShutdown(False)
+
+In order to test each example, you need to be in the parent directory of the RaspberryMotors/ directory. Simply enter the commands:
+python3 -m RaspberryMotors.example_simple_servo
+python3 -m RaspberryMotors.example_simple_2servos
+python3 -m RaspberryMotors.example_timer_servo
+python3 -m RaspberryMotors.example_advanced_servo
 
 By the time you are done with the third example, you will find that you can do pretty much anything with
 Raspberry Pi and the Servo library.
