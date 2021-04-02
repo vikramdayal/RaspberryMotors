@@ -8,7 +8,7 @@ setup(
     author = 'Vikram Dayal',
     author_email = 'vdayal@avman.net',
     url = 'https://github.com/vikramdayal/RaspberryMotors',
-    download_url = 'download link you saved',
+    download_url = 'https://github.com/vikramdayal/RaspberryMotors/archive/refs/tags/1.0.0-rc1.tar.gz',
     keywords = ['python3', 'Raspberry'],
     classifiers = [],
 )
