@@ -1,6 +1,6 @@
-# RaspberryServo
+#RaspberryMotors
 
-Welcome to a Raspberry Pi service library dedicated to motor control. This library has been started as an interface to control servo motors using the GPIO pins on the Raspberry pi. 
+Welcome to a Raspberry Pi service library dedicated to motor control. This library has been started as an interface to control servo motors using the GPIO pins on the Raspberry pi. Other types of motors like Stepper motors and DC motors will be added as we go along.
 
 The motivation to write this library was that using servos on Raspberry is too painful. One must set up the pulse width modulation (PWM) and calculate duty cycles in order to operate the servos! I also wanted to control several servo motors simultaneously and 
 most example were showing only how to control one servo at a time. Mostly, I was missing the quiet elegance on the Arduino Servo library.
@@ -10,8 +10,8 @@ Getting started
 
 1. Make your working directory and change directory (cd) to it
 2. Issue the following command:
-**git clone https://github.com/vikramdayal/RaspberryServo**
-3. cd RaspberryServo
+**git clone https://github.com/vikramdayal/RaspberryMotors**
+3. cd RaspberryMotors
 4. You are done! Explore and test
 
 If you want to figure out how to use the library, you might start by using the examples in the order provided below:
