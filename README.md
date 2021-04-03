@@ -44,10 +44,21 @@ python3 -m RaspberryMotors.example_advanced_servo
 By the time you are done with the third example, you will find that you can do pretty much anything with
 Raspberry Pi and the Servo library.
 
-Please note that the servos will operate only if they are wired correctly. Simplified instructions on wiring the servos are provided below.
+Help
+----
+The examples and classes are fully documented, just enter the following commands (type in only the text bold):
+$ **python3**
+Python 3.7.3 (default, Jul 25 2020, 13:03:44) 
+[GCC 8.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> **help("RaspberryMotors")**
+
+The system will respond with all the different help options and features available. Feel free to explore to any detail required.
+
 
 Wiring required to run the example
 ==================================
+Please note that the servos will operate only if they are wired correctly. Simplified instructions on wiring the servos are provided below.
 
 The examples provided here require two servo motors, I used Vilros SG90 (9g) and MicroServo DXW90 (9g) servos. Please feel free 
 to use any of your own servo brands with their ratings. Keep in mind if you are using the bigger servos you would have to power them separately. The internet
