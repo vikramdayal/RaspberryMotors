@@ -7,12 +7,27 @@ most example were showing only how to control one servo at a time. Mostly, I was
 
 Getting started
 ===============
+There are two ways to using the library, namely:downloading from git, or using pip install.
 
+Downloading from Git
+--------------------
 1. Make your working directory and change directory (cd) to it
 2. Issue the following command:
 **git clone https://github.com/vikramdayal/RaspberryMotors**
 3. You are done! Explore and test
 
+Using pip
+---------
+Just enter the command:
+
+**pip install -i https://pypi.org/simple/ RaspberryMotors**
+
+You can always see the sample code here:
+
+https://github.com/vikramdayal/RaspberryMotors
+
+Exploring and testing
+---------------------
 If you want to figure out how to use the library, you might start by using the examples in the order provided below:
 
 1. example_simple_servo.py: simple setup and control a single servo
